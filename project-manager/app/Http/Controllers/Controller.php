@@ -11,6 +11,6 @@ class Controller extends BaseController
 {
     /**
      * @OA\Info(title="Projects Manager API", version="0.1")
-     */
+     **/
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
