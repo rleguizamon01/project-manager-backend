@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 
+$herokuDb = parse_url(env('DATABASE_URL', "postgres://ykwycymeqesjaf:66823e6cce5ba19851e8a1dbbf9058dc64180a90b42ff76f1c06792480daeec9@ec2-34-232-191-133.compute-1.amazonaws.com:5432/dbac1qhv561u7f"));
+
 return [
 
     /*
@@ -66,11 +68,11 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => $herokuDb['host'],
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => substr($herokuDb['path'], 1),
+            'username' => $herokuDb['user'],
+            'password' => $herokuDb['pass'],
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
