@@ -12,6 +12,10 @@ class ProjectController extends Controller
      * @OA\Get(
      *     path="/api/projects",
      *     tags={"project"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
      *     description="Displays a listing of projects",
      *     operationId="index",
      * )
@@ -166,7 +170,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @OA\Delete(
+     * @OA\DELETE(
      *     path="/api/projects/{projectId}",
      *     tags={"project"},
      *     description="Deletes a specific project",
