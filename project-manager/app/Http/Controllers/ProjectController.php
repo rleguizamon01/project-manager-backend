@@ -40,6 +40,10 @@ class ProjectController extends Controller
      *     tags={"project"},
      *     description="Stores a new project",
      *     operationId="store",
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error not found",
+     *     ),
      *     @OA\RequestBody(
      *         description="Input data format",
      *         @OA\MediaType(
@@ -91,6 +95,10 @@ class ProjectController extends Controller
      *     tags={"project"},
      *     description="Displays a specific project",
      *     operationId="show",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *     ),
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
@@ -114,6 +122,10 @@ class ProjectController extends Controller
      *     tags={"project"},
      *     description="Updates a specific project",
      *     operationId="update",
+    *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *     )
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
@@ -170,11 +182,15 @@ class ProjectController extends Controller
     }
 
     /**
-     * @OA\DELETE(
+     * @OA\Delete(
      *     path="/api/projects/{projectId}",
      *     tags={"project"},
      *     description="Deletes a specific project",
      *     operationId="delete",
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated"
+     *     ),
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
