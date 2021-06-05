@@ -7,12 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
-{
+{   
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\GET(
+     *     path="/api/projects",
+     *     tags={"project"},
+     *     description="Displays a listing of projects",
+     *     operationId="index",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     )
+     * )
      */
+
     public function index()
     {
         $query = Project::query();
@@ -27,10 +35,50 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\POST(
+     *     path="/api/projects",
+     *     tags={"project"},
+     *     description="Stores a new project",
+     *     operationId="store",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Project stored successfully",
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Input data format",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="project_name",
+     *                     description="Name of the new project",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     description="Description of the new project",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="manager_id",
+     *                     description="Id of the manager of the new project",
+     *                     type="integer"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="assigned_id",
+     *                     description="Id of the assigned user of the new project",
+     *                     type="integer"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="enabled",
+     *                     description="Status of the new project",
+     *                     type="boolean"
+     *                 )
+     *             )
+     *         )
+     *     )     
+     * )
      */
     public function store(ProjectRequest $request)
     { 
@@ -42,21 +90,103 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * @OA\GET(
+     *     path="/api/projects/{projectId}",
+     *     tags={"project"},
+     *     description="Displays a specific project",
+     *     operationId="show",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid ID supplier"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Project not found"
+     *     ),
+     *     @OA\Parameter(
+     *         name="projectId",
+     *         in="path",
+     *         description="ID of project to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     )
+     * )
      */
     public function show(Project $project)
     {
         return response()->json($project->load('userManager', 'userAssigned'));
     }
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * @OA\PUT(
+     *     path="/api/projects/{projectId}",
+     *     tags={"project"},
+     *     description="Updates a specific project",
+     *     operationId="update",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid ID supplier"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Project not found"
+     *     ),
+     *     @OA\Parameter(
+     *         name="projectId",
+     *         in="path",
+     *         description="ID of project to edit",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Input data format",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="project_name",
+     *                     description="Updated name of the project",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     description="Updated description of the project",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="manager_id",
+     *                     description="Updated id of the manager of the project",
+     *                     type="integer"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="assigned_id",
+     *                     description="Updated id of the assigned user of the project",
+     *                     type="integer"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="enabled",
+     *                     description="Updated status of the project",
+     *                     type="boolean"
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function update(ProjectRequest $request, Project $project)
     {
@@ -68,10 +198,34 @@ class ProjectController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * @OA\DELETE(
+     *     path="/api/projects/{projectId}",
+     *     tags={"project"},
+     *     description="Deletes a specific project",
+     *     operationId="delete",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid ID supplier"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Project not found"
+     *     ),
+     *     @OA\Parameter(
+     *         name="projectId",
+     *         in="path",
+     *         description="ID of project to delete",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     )
+     * )
      */
     public function destroy(Project $project)
     {
