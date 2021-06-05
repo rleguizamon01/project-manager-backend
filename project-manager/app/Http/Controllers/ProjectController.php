@@ -14,10 +14,6 @@ class ProjectController extends Controller
      *     tags={"project"},
      *     description="Displays a listing of projects",
      *     operationId="index",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *     )
      * )
      */
 
@@ -35,15 +31,11 @@ class ProjectController extends Controller
     }
 
     /**
-     * @OA\POST(
+     * @OA\Post(
      *     path="/api/projects",
      *     tags={"project"},
      *     description="Stores a new project",
      *     operationId="store",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Project stored successfully",
-     *     ),
      *     @OA\RequestBody(
      *         description="Input data format",
      *         @OA\MediaType(
@@ -90,23 +82,11 @@ class ProjectController extends Controller
     }
 
     /**
-     * @OA\GET(
+     * @OA\Get(
      *     path="/api/projects/{projectId}",
      *     tags={"project"},
      *     description="Displays a specific project",
      *     operationId="show",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Invalid ID supplier"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Project not found"
-     *     ),
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
@@ -125,23 +105,11 @@ class ProjectController extends Controller
     }
 
     /**
-     * @OA\PUT(
+     * @OA\Put(
      *     path="/api/projects/{projectId}",
      *     tags={"project"},
      *     description="Updates a specific project",
      *     operationId="update",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Invalid ID supplier"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Project not found"
-     *     ),
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
@@ -198,23 +166,11 @@ class ProjectController extends Controller
     }
 
     /**
-     * @OA\DELETE(
+     * @OA\Delete(
      *     path="/api/projects/{projectId}",
      *     tags={"project"},
      *     description="Deletes a specific project",
      *     operationId="delete",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Invalid ID supplier"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Project not found"
-     *     ),
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
