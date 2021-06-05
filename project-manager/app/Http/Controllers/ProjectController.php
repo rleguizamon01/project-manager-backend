@@ -9,7 +9,7 @@ use App\Http\Requests\ProjectRequest;
 class ProjectController extends Controller
 {   
     /**
-     * @OA\GET(
+     * @OA\Get(
      *     path="/api/projects",
      *     tags={"project"},
      *     description="Displays a listing of projects",
