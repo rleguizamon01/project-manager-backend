@@ -125,7 +125,7 @@ class ProjectController extends Controller
     *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
-     *     )
+     *     ),
      *     @OA\Parameter(
      *         name="projectId",
      *         in="path",
